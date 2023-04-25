@@ -1,0 +1,177 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+      "WorkSpaceNamePrefix": {
+        "type": "string",
+        "minLength": 3,
+        "maxLength": 5
+      }
+    },
+    "variables": {
+      "_artifactsLocation" : "https://saresponsibleai.blob.core.windows.net/dataset/",
+      "IdentityType" : "systemAssigned",
+      "tenantId": "[subscription().tenantId]",
+      "resourceGroupname": "[resourceGroup().name]",
+      "ContainerRegistrySku":"Standard",
+      "location": "[resourceGroup().location]",
+      "StorageRedundancy": "Standard_LRS",
+      "VMSize": "Standard_DS12_v2",
+      "skipValidation": true,
+      "vnetName":"[concat('vnet',uniqueString(resourceGroup().id, parameters('WorkSpaceNamePrefix')))]",
+      "subnetName":"[concat('subnet', parameters('WorkSpaceNamePrefix'))]",
+      "subnet": {
+            "id": "[resourceId(variables('resourceGroupname'), 'Microsoft.Network/virtualNetworks/subnets', variables('vnetName'), variables('subnetName'))]"
+            },
+      "InlineCommand":"ls",
+      "computeName":"ResponsibleAI",
+      "uniqueStorageName": "[concat('store',parameters('workspaceNameprefix'), uniqueString(resourceGroup().id))]",
+      "uniqueRegistryName": "[concat('regis',parameters('workspaceNameprefix'), uniqueString(resourceGroup().id))]",
+      "uniqueappInsightName": "[concat('appin',parameters('workspaceNameprefix'), uniqueString(resourceGroup().id))]",
+      "uniqueWorkspaceName": "[concat('workspaceml',uniqueString(resourceGroup().id))]",
+      "uniquekeyVaultName": "[concat('keyv',parameters('workspaceNameprefix'), uniqueString(resourceGroup().id))]",
+      "storageAccountId": "[resourceId(resourceGroup().name, 'Microsoft.Storage/storageAccounts', variables('uniqueStorageName'))]",
+      "keyVaultId": "[resourceId(resourceGroup().name, 'Microsoft.KeyVault/vaults', variables('uniquekeyVaultName'))]",
+      "containerRegistryId": "[resourceId(resourceGroup().name, 'Microsoft.ContainerRegistry/registries', variables('uniqueRegistryName'))]",
+      "applicationInsightId": "[resourceId(resourceGroup().name, 'Microsoft.Insights/components', variables('uniqueappInsightName'))]"
+    },
+    "resources": [
+      {
+        "type": "Microsoft.Storage/storageAccounts",
+        "apiVersion": "2022-05-01",
+        "name": "[variables('uniqueStorageName')]",
+        "location": "[variables('location')]",
+        "sku": {
+          "name": "[variables('StorageRedundancy')]"
+        },
+        "kind": "StorageV2",
+        "tags": {},
+        "properties": {
+          "supportsHttpsTrafficOnly": true,
+          "encryption": {
+                      "services": {
+                          "blob": {
+                              "enabled": true
+                          },
+                          "file": {
+                              "enabled": true
+                          }
+                      },
+                  "keySource": "Microsoft.Storage"
+              }
+        }
+      },
+      {
+        "type": "Microsoft.ContainerRegistry/registries",
+        "apiVersion": "2022-02-01-preview",
+        "name": "[variables('uniqueRegistryName')]",
+        "location": "[variables('location')]",
+        "sku": {
+              "name": "[variables('ContainerRegistrySku')]"
+        },
+        "tags": {},
+        "properties": {
+            "adminUserEnabled": true
+          }
+      },
+      {
+          "type": "Microsoft.Insights/components",
+          "apiVersion": "2020-02-02",
+          "name": "[variables('uniqueappInsightName')]",
+          "location": "[variables('location')]",
+          "kind": "web",
+          "tags": {},
+          "properties": {
+              "Application_Type": "web"
+          }
+      },
+      {
+          "type": "Microsoft.KeyVault/vaults",
+          "apiVersion": "2022-07-01",
+          "name": "[variables('uniquekeyVaultName')]",
+          "location": "[variables('location')]",
+          "tags": {},
+          "properties": {
+              "tenantId": "[variables('tenantId')]",
+              "sku": {
+                  "name": "standard",
+                  "family": "A"
+              },
+              "accessPolicies": []
+          }
+      },
+      {
+        "type" : "Microsoft.MachineLearningServices/workspaces",
+        "apiVersion" : "2022-10-01",
+        "name": "[variables('uniqueWorkspaceName')]",
+        "location":"[variables('location')]",
+        "identity": {
+              "type": "[variables('IdentityType')]"
+          },
+        "properties":{
+          "friendlyName": "[variables('uniqueWorkspaceName')]",
+          "storageAccount": "[variables('storageAccountId')]",
+          "keyVault": "[variables('keyVaultId')]",
+          "applicationInsights": "[variables('applicationInsightId')]",
+          "containerRegistry": "[variables('containerRegistryId')]"
+          },
+          "dependsOn": [
+          "[resourceId('Microsoft.Insights/components', variables('uniqueappInsightName'))]",
+          "[resourceId('Microsoft.ContainerRegistry/registries', variables('uniqueRegistryName'))]",
+          "[resourceId('Microsoft.Storage/storageAccounts', variables('uniqueStorageName'))]",
+          "[resourceId('Microsoft.KeyVault/vaults', variables('uniquekeyVaultName'))]"
+          ]
+      },
+      {
+        "type": "Microsoft.Network/virtualNetworks",
+        "apiVersion": "2021-08-01",
+        "name": "[variables('vnetName')]",
+        "location": "[variables('location')]",
+        "properties": {
+          "addressSpace": {
+            "addressPrefixes": [
+              "10.0.0.0/16"
+            ]
+          },
+          "subnets": [
+              {
+              "name": "[variables('subnetName')]",
+              "properties": {
+                  "addressPrefix": "10.0.0.0/24"
+                  }
+              }
+              ]
+          }
+      },
+      {
+        "type": "Microsoft.MachineLearningServices/workspaces/computes",
+        "apiVersion": "2020-08-01",
+        "name": "[concat(variables('uniqueWorkspaceName'), '/', variables('computeName'))]",
+        "location": "[variables('location')]",
+        "tags": {},
+        "properties":{
+              "computeType": "ComputeInstance",
+              "properties":{
+                  "applicationSharingPolicy": "Shared",
+                  "computeInstanceAuthorizationType": "personal",
+                  "subnet": "[if(and(not(empty(variables('resourceGroupname'))),not(empty(variables('vnetName'))),not(empty(variables('subnetName')))), variables('subnet'), json('null'))]",
+                  "vmSize": "[variables('VMSize')]",
+                  "setupScripts": {
+                        "scripts": {
+                            "creationScript": {
+                                "scriptSource": "inline",
+                                "scriptData": "[base64(variables('InlineCommand'))]",
+                                "scriptArguments": ""
+                            }
+                        }
+                    },
+                   "schedules": ""
+                }
+            },
+        "dependsOn": [
+            "[resourceId('Microsoft.MachineLearningServices/workspaces', variables('uniqueWorkspaceName'))]",
+            "[resourceId('Microsoft.Network/virtualNetworks',variables('vnetName'))]"
+            ]
+      }
+    ]
+}

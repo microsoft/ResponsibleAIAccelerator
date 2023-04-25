@@ -1,0 +1,70 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/0.1.2-preview/CreateUIDefinition.MultiVm.json#",
+    "handler": "Microsoft.Azure.CreateUIDef",
+    "version": "0.1.2-preview",
+    "parameters": {
+        "config": {
+            "isWizard": true,
+            "basics": {
+                "subscription": {
+                    "constraints": {
+                        "validations": [
+                            {
+                                "permission": "Microsoft.Authorization/roleAssignments/write",
+                                "message": "Must have the ability to create role assignments for managed identities."
+                            }
+                        ]
+                    }
+                },
+                "resourceGroup": {
+                    "constraints": {
+                        "validations": []
+                    },
+                    "allowExisting": true
+                },
+                "location": {
+                    "label": "Region",
+                    "toolTip": "The list is constrained to regions where Microsoft Machine Learning Workspace is available.",
+                    "resourceTypes": [
+                        "Microsoft.MachineLearningServices/workspaces",
+                        "Microsoft.Compute/virtualMachines",
+                        "Microsoft.Insights/components",
+                        "Microsoft.ContainerRegistry/registries",
+                        "Microsoft.KeyVault/vaults",
+                        "Microsoft.Storage/storageAccounts"
+                    ],
+                    "allowedValues": [
+                        "centralus",
+                        "uksouth",
+                        "asiapacific"
+                    ],
+                    "visible": true
+                }
+            }
+        },
+        "basics": [
+            {
+                "name": "WorkSpaceNamePrefix",
+                "type": "Microsoft.Common.TextBox",
+                "label": "WorkSpaceName Prefix",
+                "defaultValue": "",
+                "constraints": {
+                    "required": true,
+                    "validations": [
+                        {
+                            "regex": "^[a-z]{3,5}$",
+                            "message": "The prefix should be between 3 to 5 characters."
+                        }
+					]
+                },
+                "visible": true
+            }
+        ],
+        "outputs": {
+            "WorkSpaceNamePrefix": "[steps('basics').WorkSpaceNamePrefix]",
+            "kind": "ResourceGroup",
+            "location": "[config.resourceScope.location.name]",
+            "resourceGroupId": "[config.resourceScope.resourceGroup.id]"
+        }
+    }
+}
