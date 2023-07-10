@@ -6,7 +6,7 @@
 
 - The Machine Learning Studio home page would open-up and it would like as shown in the screenshot.
 
-![Open Up Machine Learning Studio](/documentation/media/resource_deployment/compute_1.png)
+![Open Up Machine Learning Studio](/documentation/media/resource_deployment/compute_1.PNG)
 
 - From the screensnap click on the **Compute** option as marked. As you click on the **Compute** button you will be migrated to a new page which shows - lists of compute that are already running for the machine learning workspace. As a compute instance is already created by default using the **Deploy to Azure** button. So you can see it in the tab.
 
