@@ -9,7 +9,6 @@
       }
     },
     "variables": {
-      "_artifactsLocation" : "https://saresponsibleai.blob.core.windows.net/dataset/",
       "IdentityType" : "systemAssigned",
       "tenantId": "[subscription().tenantId]",
       "resourceGroupname": "[resourceGroup().name]",
@@ -17,19 +16,21 @@
       "location": "[resourceGroup().location]",
       "StorageRedundancy": "Standard_LRS",
       "VMSize": "Standard_DS12_v2",
-      "skipValidation": true,
       "vnetName":"[concat('vnet',uniqueString(resourceGroup().id, parameters('WorkSpaceNamePrefix')))]",
       "subnetName":"[concat('subnet', parameters('WorkSpaceNamePrefix'))]",
       "subnet": {
             "id": "[resourceId(variables('resourceGroupname'), 'Microsoft.Network/virtualNetworks/subnets', variables('vnetName'), variables('subnetName'))]"
             },
       "InlineCommand":"ls",
-      "computeName":"ResponsibleAI",
-      "uniqueStorageName": "[concat('store',parameters('workspaceNameprefix'), uniqueString(resourceGroup().id))]",
-      "uniqueRegistryName": "[concat('regis',parameters('workspaceNameprefix'), uniqueString(resourceGroup().id))]",
-      "uniqueappInsightName": "[concat('appin',parameters('workspaceNameprefix'), uniqueString(resourceGroup().id))]",
-      "uniqueWorkspaceName": "[concat('workspaceml',uniqueString(resourceGroup().id))]",
-      "uniquekeyVaultName": "[concat('keyv',parameters('workspaceNameprefix'), uniqueString(resourceGroup().id))]",
+      "deploymentname":"[substring(deployment().name, sub(length(deployment().name), 4), 4)]",
+      "resourceGroupid":"[substring(resourceGroup().id,sub(length(resourceGroup().id),4),4)]",
+      "computeName":"[concat('ResponseAI',variables('resourceGroupid'),variables('deploymentname'))]",
+      "uniStorageNam": "[concat('stor',parameters('workspaceNameprefix'), variables('resourceGroupid'),variables('deploymentname'))]",
+      "uniqueStorageName": "[toLower(variables('uniStorageNam'))]",
+      "uniqueRegistryName": "[concat('regs',parameters('workspaceNameprefix'), variables('resourceGroupid'),variables('deploymentname'))]",
+      "uniqueappInsightName": "[concat('apin',parameters('workspaceNameprefix'), variables('resourceGroupid'),variables('deploymentname'))]",
+      "uniqueWorkspaceName": "[concat('woml',parameters('workspaceNameprefix'), variables('resourceGroupid'),variables('deploymentname'))]",
+      "uniquekeyVaultName": "[concat('keyv',parameters('workspaceNameprefix'), variables('resourceGroupid'),variables('deploymentname'))]",
       "storageAccountId": "[resourceId(resourceGroup().name, 'Microsoft.Storage/storageAccounts', variables('uniqueStorageName'))]",
       "keyVaultId": "[resourceId(resourceGroup().name, 'Microsoft.KeyVault/vaults', variables('uniquekeyVaultName'))]",
       "containerRegistryId": "[resourceId(resourceGroup().name, 'Microsoft.ContainerRegistry/registries', variables('uniqueRegistryName'))]",
@@ -48,6 +49,7 @@
         "tags": {},
         "properties": {
           "supportsHttpsTrafficOnly": true,
+          "softDeleteEnabled": false,
           "encryption": {
                       "services": {
                           "blob": {
@@ -71,7 +73,8 @@
         },
         "tags": {},
         "properties": {
-            "adminUserEnabled": true
+            "adminUserEnabled": true,
+            "softDeleteEnabled": false
           }
       },
       {
@@ -82,7 +85,8 @@
           "kind": "web",
           "tags": {},
           "properties": {
-              "Application_Type": "web"
+              "Application_Type": "web",
+              "softDeleteEnabled": false
           }
       },
       {
@@ -93,6 +97,7 @@
           "tags": {},
           "properties": {
               "tenantId": "[variables('tenantId')]",
+              "softDeleteEnabled": false,
               "sku": {
                   "name": "standard",
                   "family": "A"
@@ -113,7 +118,8 @@
           "storageAccount": "[variables('storageAccountId')]",
           "keyVault": "[variables('keyVaultId')]",
           "applicationInsights": "[variables('applicationInsightId')]",
-          "containerRegistry": "[variables('containerRegistryId')]"
+          "containerRegistry": "[variables('containerRegistryId')]",
+          "softDeleteEnabled": false
           },
           "dependsOn": [
           "[resourceId('Microsoft.Insights/components', variables('uniqueappInsightName'))]",
@@ -145,7 +151,7 @@
       },
       {
         "type": "Microsoft.MachineLearningServices/workspaces/computes",
-        "apiVersion": "2020-08-01",
+        "apiVersion": "2022-12-01-preview",
         "name": "[concat(variables('uniqueWorkspaceName'), '/', variables('computeName'))]",
         "location": "[variables('location')]",
         "tags": {},
@@ -173,5 +179,11 @@
             "[resourceId('Microsoft.Network/virtualNetworks',variables('vnetName'))]"
             ]
       }
-    ]
+    ],
+    "outputs": {
+    "computeInstanceNameOutput": {
+      "type": "string",
+      "value": "[variables('computeName')]"
+    }
+  }
 }
