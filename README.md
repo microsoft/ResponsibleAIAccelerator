@@ -1,7 +1,7 @@
 ## About this repository
 This repo demonstrates how you can use the Azure Machine Learning [Responsible AI dashboard](https://github.com/microsoft/responsible-ai-toolbox#introducing-responsible-ai-dashboard) to evaluate and debug your machine learning models, 
 to help reduce error and fairness issues in your model predictions and data driven decisions. 
-It describes two different demonstration implementations of the dashboard, covering a financial services scenario and a health care scenario.
+It describes two different demonstration implementations of the dashboard, covering a financial services scenario, a health care scenario, and a higher education scenario.
 
 
 Understanding your model predictions, resolving errors to ensure trust, and checking for potential fairness issues must be important goals for all AI developers. 
@@ -61,6 +61,12 @@ We will use two different business scenarios to illustrate how to use dashboard 
 With these valuable insights, the customer service representative can make concrete recommendations to the customer, to increase the likelihood of approval on the next application.  
 
 - **Health Care** - Medical professionals are working to ensure there is enough hospital capacity Covid patients. They use a variety of data about infected patients to identify those likely to require hospitalization. The dashboard can also guide their treatments, to help reduce the number of hospitalizations. 
+
+- **Education** - Student attrition rates are a key performance indicator for any higher education provider and have a significant
+impact on students. Understanding what causes student attrition (ie financial status, academic performance, or student wellbeing)
+is a complex challenge which is often specific to individual student circumstances. The RAI dashboard can help higher education decision makers better understand student attrition while informingthe creation of intervents to improve student support services and foster student engagment and belonging.
+
+
 
 ## Solution Overview 
 
@@ -122,7 +128,20 @@ if you need additional guidance with this task.
     for suggestions on how to interpret and apply the Responsible AI dashboard.  
     <br />
 
-1. **Health Care**
+2. **Health Care**
+    In addition to several components that can help you improve model performance, 
+    this scenario highlights a causal analysis tool that can guide real-world action. 
+    This notebook takes about **25-30 minutes** to create the dashboard.  
+    
+    - Follow this link to the [Jupyter notebook](./education_story/Education_Dashboard.ipynb). 
+        - If you choose not to clone this repo to Azure ML studio, 
+        check [this link](./documentation/uploadjupyternotebookandrun.md) for guidance on uploading the notebook and data files.  
+    - Once you have finished running the notebook,
+    refer to this [Health Care scenario guide](./documentation/educationExample.md) 
+    for suggestions on how to interpret and apply the Responsible AI dashboard.  
+    <br />
+
+3. **Education**
     In addition to several components that can help you improve model performance, 
     this scenario highlights a causal analysis tool that can guide real-world action. 
     This notebook takes about **25-30 minutes** to create the dashboard.  
@@ -134,7 +153,6 @@ if you need additional guidance with this task.
     refer to this [Health Care scenario guide](./documentation/healthCareExample.md) 
     for suggestions on how to interpret and apply the Responsible AI dashboard.  
     <br />
-
 
 ## Folders 
 - documentation
