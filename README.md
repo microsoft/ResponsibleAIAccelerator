@@ -150,7 +150,7 @@ if you need additional guidance with this task.
         - If you choose not to clone this repo to Azure ML studio, 
         check [this link](./documentation/uploadjupyternotebookandrun.md) for guidance on uploading the notebook and data files.  
     - Once you have finished running the notebook,
-    refer to this [Health Care scenario guide](./documentation/healthCareExample.md) 
+    refer to this [Education scenario guide](./documentation/healthCareExample.md) 
     for suggestions on how to interpret and apply the Responsible AI dashboard.  
     <br />
 
