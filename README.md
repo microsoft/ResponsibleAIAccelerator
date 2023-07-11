@@ -86,11 +86,11 @@ to preview the Azure Portal experience before proceeding.
 
 <br />
 
-[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fsaresponsibleai.blob.core.windows.net%2Fdataset%2FARMTemplate.json)
+[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fsaresponsibleai.blob.core.windows.net%2Fdataset%2FArmTemplate_2.json/createUIDefinitionUri/https%3A%2F%2Fsaresponsibleai.blob.core.windows.net%2Fdataset%2FDefintion_finUI.json)
 
-<br />
+Here are three important reminders to help you successfully complete this accelerator. 
+- **Change in VM Name** -- If you have created the accelerator using the "Deploy to Azure" button, please refer to this [guide](./documentation/changeVMName.md) to execute your notebooks seamlessly and without any issues.
 
-Here are two important reminders to help you successfully complete this accelerator. 
 - **VM Sizing** -- The ARM template provided deploys a standard size VM. 
 If you want to change the VM size, please refer to [this guidance](./documentation/ScalingtheVMsize.md).  
 
@@ -116,7 +116,8 @@ if you need additional guidance with this task.
 
     - Follow this link to the [Jupyter notebook](./finance_story/Finance_Dashboard.ipynb). 
         - If you choose not to clone this repo to Azure ML studio, 
-        check [this link](./documentation/uploadjupyternotebookandrun.md) for guidance on uploading the notebook and data files.  
+        check [this link](./documentation/uploadjupyternotebookandrun.md) for guidance on uploading the notebook and data files.
+        - If you have created the resources using the "Deploy to Azure" button, please refer to this [guide](./documentation/namechanged.md) to make a simple change in the Jupyter Notebook to ensure the proper execution of the Notebook.
     - Once you have finished running the notebook,
     refer to this [Financial Services scenario guide](./documentation/financialServicesExample.md) 
     for suggestions on how to interpret and apply the Responsible AI dashboard.  
@@ -130,6 +131,7 @@ if you need additional guidance with this task.
     - Follow this link to the [Jupyter notebook](./healthcare_story/Covid_Healthcare_Dashboard.ipynb). 
         - If you choose not to clone this repo to Azure ML studio, 
         check [this link](./documentation/uploadjupyternotebookandrun.md) for guidance on uploading the notebook and data files.  
+        - If you have created the resources using the "Deploy to Azure" button, please refer to this [guide](./documentation/namechanged.md) to make a simple change in the Jupyter Notebook to ensure the proper execution of the Notebook.
     - Once you have finished running the notebook,
     refer to this [Health Care scenario guide](./documentation/healthCareExample.md) 
     for suggestions on how to interpret and apply the Responsible AI dashboard.  

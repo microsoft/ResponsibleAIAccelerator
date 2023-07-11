@@ -35,11 +35,11 @@
 - To check if your jupyter Notebook is connected to the compute Machine. You can see there are two things that you need to verify
     * There will be a green dot available which can only be seen when the jupyter Notebook has a compute instance that is responsible for running it.
 
-![Notebook Run](/documentation/media/resource_deployment/compute_estd.JPG)   
+![Notebook Run](/documentation/media/resource_deployment/compute_estd.jpg)   
 
 - Running the jupyter Notebook is simple. 
     * You need to click on the arrow icon, which is present beside every code cell, and it is marked with the **3**.
     * You can see the output for the previous cell of code that is marked with the **2**.
     * Also after runnig the code you can see the time to run the code as shown in **1**.
 
-![Notebook Compute](/documentation/media/resource_deployment/running_compute.JPG)   
+![Notebook Compute](/documentation/media/resource_deployment/running_compute.jpg)   

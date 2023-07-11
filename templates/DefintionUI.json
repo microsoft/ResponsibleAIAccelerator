@@ -33,11 +33,6 @@
                         "Microsoft.KeyVault/vaults",
                         "Microsoft.Storage/storageAccounts"
                     ],
-                    "allowedValues": [
-                        "centralus",
-                        "uksouth",
-                        "asiapacific"
-                    ],
                     "visible": true
                 }
             }
@@ -50,7 +45,7 @@
                 "defaultValue": "",
                 "constraints": {
                     "required": true,
-                    "validations": [
+	                "validations": [
                         {
                             "regex": "^[a-z]{3,5}$",
                             "message": "The prefix should be between 3 to 5 characters."
@@ -60,6 +55,8 @@
                 "visible": true
             }
         ],
+		"steps": [
+		],
         "outputs": {
             "WorkSpaceNamePrefix": "[steps('basics').WorkSpaceNamePrefix]",
             "kind": "ResourceGroup",
