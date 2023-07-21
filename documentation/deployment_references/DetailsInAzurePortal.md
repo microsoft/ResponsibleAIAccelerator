@@ -51,4 +51,4 @@
     * You will see that the name to the workspace and resoures were assigned automaticall. The name to all the resources are unique and are a combination of **_Work Space Name Prefix_** and other options.
 ![Deployment succeed](/documentation/media/resource_deployment/deployment_succeed.png)
 
-- As we can see that everything is set by default and the size of all the resources have been pre-defined. But there are further steps to increase/decrease the size of various resources. To change the size of the VM you can refer to this [link](/documentation/ScalingtheVMsize.md)
+- As we can see that everything is set by default and the size of all the resources have been pre-defined. But there are further steps to increase/decrease the size of various resources. To change the size of the VM you can refer to this [link](/documentation/deployment_references/ScalingtheVMsize.md)

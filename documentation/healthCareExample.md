@@ -49,7 +49,7 @@ Feature	        |BP_Diastolic	        |Diastolic blood pressure of the patient i
 Feature	        |Social_activity	    |Indicates the level of social activity of the patient, ranging from 1 to 5
 Target Variable	|InHospital	            |Indicates if the patient is currently hospitalized due to COVID
 
-Follow this link for an [Excel version](.\documentation\data_dictionary\Data_dictionary_Healthcare.xlsx)
+Follow this link for an [Excel version](.\documentation\data_dictionaries\Data_dictionary_Healthcare.xlsx)
 of the data dictionary. 
 
 ## Debugging the classification model 
@@ -85,7 +85,7 @@ You will see patients with `Social_activity != 1|5` and `Blood_Oxygen-SpO2` valu
 about 5x higher than the base error rate (30/1055). 
 As a reminder, `Social_activity` is measured on a 5-point scale, with "5" being the most socially active, i.e. limited social distancing." 
 
-![covid-error-treemap-00](./media/healthcare/errorTree_highBloodO2.png)
+![covid-error-treemap-00](/documentation/media/healthcare/errorTree_highBloodO2.png)
 
 
 This contrasts sharply with patients of identical social activity, but with `Blood_Oxygen-SpO2 <= 90.50`, 
@@ -97,7 +97,7 @@ Exploring different nodes of the tree map allows you to easily find the combinat
 The RAI dashboard's Error Analysis tool can be used to proactively identify major and concentrated shortcomings of the model.  
 
 
-![covid-error-treemap-01](./media/healthcare/errorTree_lowerBloodO2.png)
+![covid-error-treemap-01](/documentation/media/healthcare/errorTree_lowerBloodO2.png)
 
 
 **Save erroneous cohorts** -- When you identify a tree node you would like to explore further, 
@@ -115,15 +115,15 @@ and name it "Error-HighBloodO2."
 and name it "LessError-LowerBloodO2." 
 
 
-![covid-error-treemap-02](./media/healthcare/errorTree_saveCohort.png)
+![covid-error-treemap-02](/documentation/media/healthcare/errorTree_saveCohort.png)
 
 
 **Top features leading to errors** -- Click on the feature list icon at the top of the error analysis section. 
 This will surface a list of features, ranked by their correlations to the model’s errors. 
 
-![covid-error-topfeatures-03](./media/healthcare/errorFeatureList_select.png)
+![covid-error-topfeatures-03](/documentation/media/healthcare/errorFeatureList_select.png)
 
-![covid-error-topfeatures-04](./media/healthcare/errorFeatureList_view.png)
+![covid-error-topfeatures-04](/documentation/media/healthcare/errorFeatureList_view.png)
 
 
 **2) Heat map** 
@@ -140,7 +140,7 @@ Like the error tree nodes, you can “save a new cohort” based on your selecte
 Simply click on the “+ New cohort” button near the top of the chart. 
 You will be presented with a menu to identify the features and filters that can be used to form a cohort.
  
- ![covid-error-newcohort-05](./media/healthcare/errorTree_selectNewCohort.png)
+ ![covid-error-newcohort-05](/documentation/media/healthcare/errorTree_selectNewCohort.png)
 
 
 ### Model overview and performance analysis
@@ -148,7 +148,7 @@ Here we can look at all the data and compare individual cohorts.
 Each of the custom cohorts defined above is included in this view. 
 You can select the metrics included in the chart. 
 
-![covid-modelperf-00](./media/healthcare/modelOverview_selectMetrics.png)
+![covid-modelperf-00](/documentation/media/healthcare/modelOverview_selectMetrics.png)
 
 
 **Review performance** -- For our example, we will use the default value. 
@@ -162,17 +162,17 @@ This could result in very serious consequences for these patients.
 This is contrasted with the other cohort. 
 It has a relatively higher false negative rate and is also more accurate.
 
-![covid-modelperf-01](./media/healthcare/modelOverview_falsePositive.png)
+![covid-modelperf-01](/documentation/media/healthcare/modelOverview_falsePositive.png)
 
 
 Similar investigations can be performed using the visualization options presented below the metrics table. 
 
-![covid-modelperf-02](./media/healthcare/modelOverview_selectVisual.png)
+![covid-modelperf-02](/documentation/media/healthcare/modelOverview_selectVisual.png)
 
 These will present a variety of options, including several bar chart views and a confusion matrix. 
 These can be customized by different dimensions, such as cohort or metric. 
 
-![covid-modelperf-03](./media/healthcare/modelOverview_visualizeMetrics.png)
+![covid-modelperf-03](/documentation/media/healthcare/modelOverview_visualizeMetrics.png)
 
 
 ### Fairness
@@ -183,7 +183,7 @@ These can be cohorts you previously defined or newly defined groups.
 **Configure the Feature Analysis tool** -- At the top of the Model overview section, 
 select the Feature cohort option. 
 
-![covid-fairness-00](./media/healthcare/modelOverview_fairness_config.png)
+![covid-fairness-00](/documentation/media/healthcare/modelOverview_fairness_config.png)
 
 Next, select up to two features you wish to examine. 
 For starters, you could select your sensitive features or those features that were identified to have a higher correlation with errors, 
@@ -193,7 +193,7 @@ This will enable you to explore how different subgroups compare in terms of mode
 In this example, “Gender” was selected. You can easily compare performance metrics across different Gender groups.
 
 
-![covid-fairness-01](./media/healthcare/modelOverview_featureCohort_gender.png)
+![covid-fairness-01](/documentation/media/healthcare/modelOverview_featureCohort_gender.png)
 
 
 The tool also supports comparing multiple features simultaneously. 
@@ -201,7 +201,7 @@ Here we select “Gender” and “Age-years” as our features to see the model
 We observe a false positive rate of 80% for women aging less than 36 years old. 
 For men younger than 36 years old, we see a false positive rate of 50%, also quite high.
 
-![covid-fairness-02](./media/healthcare/modelOverview_featureCohort_genderAge.png)
+![covid-fairness-02](/documentation/media/healthcare/modelOverview_featureCohort_genderAge.png)
 
 
 ### Data analysis
@@ -216,7 +216,7 @@ For example, the data analysis might reveal the lack of representation in your t
 **Explore error prone cohort** -- We can quickly build a chart that highlights one of the cohorts we defined earlier. 
 Select chart view and then pick your erroneous cohort of interest: error-HighBloodO2. 
 
-![covid-dataexplorer-00](./media/healthcare/dataAnalysis_selectCohort.png)
+![covid-dataexplorer-00](/documentation/media/healthcare/dataAnalysis_selectCohort.png)
 
 As with earlier charts, you can click on axis lables to configure the chart to better support your analysis. 
 We select “Count” on the Y axis and “True Y” on the X axis to highlight the ground truth representation of classes “Hospitalized” and “Not Hospitalized”.  
@@ -224,7 +224,7 @@ Here we see that the number of “True Y” observations in this cohort is signi
 This skewed data is something that could potentially be mitigated with data resampling or balancing techniques.  
 
 
-![covid-dataexplorer-01](./media/healthcare/dataAnalysis_selectAxis.png)
+![covid-dataexplorer-01](/documentation/media/healthcare/dataAnalysis_selectAxis.png)
 
 
 ### Explainability
@@ -250,22 +250,22 @@ Observing the overall feature importance values on the entire test set,
 we see that “Age-years” is the dominant feature. 
 The model is using it as a strong indicator of predicting hospitalizations. 
 
-![covid-explain-global-00](./media/healthcare/featureImportance_global_allData.png)
+![covid-explain-global-00](/documentation/media/healthcare/featureImportance_global_allData.png)
 
 By clicking on each feature’s bar chart, you can look at how it, impacts predictions for each class. 
 For instance, by clicking on “Age-years” blue bar chart and picking the "Hospitalized" class under the class importance weights dropdown, 
 you can see how this feature impacts the prediction of “Hospitalized”. 
 
-![covid-explain-global-01](./media/healthcare/featureImportance_selectClassWeights.png) 
+![covid-explain-global-01](/documentation/media/healthcare/featureImportance_selectClassWeights.png) 
 
 Here we see that for patients over 50 years old, age is a stronger positive indicator for predicting hospitalizations. 
 
-![covid-explain-global-02](./media/healthcare/featureImportance_global_ageDetail.png) 
+![covid-explain-global-02](/documentation/media/healthcare/featureImportance_global_ageDetail.png) 
 
 
 1.) **Local explainability (Individual feature importance)** -- You can also look at what data the model found most impactful for specific observations. Simply toggle to Individual feature importance and select the observations you want to explore. 
 
-![covid-explain-local-00](./media/healthcare/featureImportance_local_selectObservations.png)
+![covid-explain-local-00](/documentation/media/healthcare/featureImportance_local_selectObservations.png)
 
 
 **Reminder** -- This information can help you interpret the results of your model; however it does not show causality. 
@@ -284,7 +284,7 @@ and the y-axis to "Age-Years," if not already selected.
 You can explore the data to see the predicted outcome for each datapoint. 
 For this example, we are going to take a closer look at the Index 118 datapoint. 
 
-![Counterfactual-00](./media/healthcare/counterFactual_start.png)
+![Counterfactual-00](/documentation/media/healthcare/counterFactual_start.png)
 
 
 One the lower chart, you can the top features influencing the prediction. 
@@ -293,12 +293,12 @@ would most likely lead to an opposite model outcome.
 For this patient, the Immuno_Comprimised and Asthma are the features with the strongest influence on the prediction.  
 
 
-![Counterfactual-01](./media/healthcare/counterFactual_topFeatures_idx118.png)
+![Counterfactual-01](/documentation/media/healthcare/counterFactual_topFeatures_idx118.png)
 
 Now return to the upper chart and confirm that Index 118 is selected in the "Selected datapoint" drop down. 
 Then click on "Create what-if counterfactual." 
 
-![Counterfactual-02](./media/healthcare/counterFactual_createWhatIf_idx118.png)
+![Counterfactual-02](/documentation/media/healthcare/counterFactual_createWhatIf_idx118.png)
 
 This will bring you to a chart where you can see the current scenario at the top, 
 where the predicted class is "InHospital",
@@ -307,13 +307,13 @@ In particular, you can see that this applicant has a relatively high social acti
 In the several scenarios where this patient would likely receive a different predicted outcome, 
 you can see social activity is lower and blood oxygen levels are higher. 
 
-![Counterfactual-03](./media/healthcare/counterFactual_performWhatIf_idx118.png)
+![Counterfactual-03](/documentation/media/healthcare/counterFactual_performWhatIf_idx118.png)
 
 Notice the row at the bottom of the chart. 
 Here is where you can manually select different values for the patient and 
 copy this hypothetical datapoint to the previous chart by clicking on the "Save as a new datapoint" button. 
 
-![Counterfactual-04](./media/healthcare/counterFactual_whatIfRowCopy_idx118.png)
+![Counterfactual-04](/documentation/media/healthcare/counterFactual_whatIfRowCopy_idx118.png)
 
 
 ## Take real-world action
@@ -328,17 +328,17 @@ We're going to start with aggregate causal effects.
 This is the overall impact of a certain factor on a real-world outcome, 
 e.g., doesn't need hospitalization. 
 
-![covid-causal-analysis-00](./media/healthcare/causalAnalysis_selectComponent.png)
+![covid-causal-analysis-00](/documentation/media/healthcare/causalAnalysis_selectComponent.png)
 
 The chart shows us that increasing temperature will only slightly decrease the likelihood that the patient will not need hospitalization. 
 Other factors, such as social activity (further left and down, on the chart) 
 will have a higher impact on chance of hospitalization. 
 
-![covid-causal-analysis-01](./media/healthcare/causalAnalysis_aggregate_temperature.png)
+![covid-causal-analysis-01](/documentation/media/healthcare/causalAnalysis_aggregate_temperature.png)
 
 Selecting “Individual causal what-if” will provide you with similar information for a specific patient. 
 
-![covid-causal-analysis-02](./media/healthcare/causalAnalysis_selectIndividual.png)
+![covid-causal-analysis-02](/documentation/media/healthcare/causalAnalysis_selectIndividual.png)
 
 
 **Treatment policy** 
@@ -348,7 +348,7 @@ This allows health care professionals to quickly focus on factors they can contr
 
 In the following example, the healthcare professional selects “social activity” as a factor they would like to provide suggestions around: 
 
-![covid-causal-analysis-03](./media/healthcare/causalAnalysis_treatmentPolicy.png)
+![covid-causal-analysis-03](/documentation/media/healthcare/causalAnalysis_treatmentPolicy.png)
 
 With that selection, they automatically get the optimal policies to get reduced hospitalizations. 
 They can see that for patients with lower blood sugar level, 
@@ -366,7 +366,7 @@ This view shows you which patients will see the greatest impact from the suggest
 In our example, the suggested treatment is to reduce social activity and the patients identified as showing the strongest response are all over 60 years old. 
 This makes sense, given the data and what we know about Covid-19. 
 
-![covid-causal-analysis-04](./media/healthcare/causalAnalysis_strongestResponse.png)
+![covid-causal-analysis-04](/documentation/media/healthcare/causalAnalysis_strongestResponse.png)
 
 
 ### Scorecard 
@@ -375,7 +375,7 @@ The RAI dashboard is accompanied by a scorecard that allows you to easily share 
 In this example, the scorecard is generated as a named output. 
 The easiest way to find it is by navigating to the folder in your Azure ML studio workspace where you saved the Jupyter notebook. 
 
-![scorecard-00](./media/healthcare/scorecard_outputFolder.png)
+![scorecard-00](/documentation/media/healthcare/scorecard_outputFolder.png)
 
 
 Here you will find a PDF document that contains valuable information about the model itself and its performance (see example below)
@@ -383,7 +383,7 @@ This is only the top portion of the scorecard.
 The complete version includes more performance metrics, cohort specific performance, fairness insights, and model explanations. 
 You can easily share it with others for auditing purposes or for helping other stakeholders build trust with your AI systems. 
 
-![scorecard-01](./media/healthcare/scorecard_header.png)
+![scorecard-01](/documentation/media/healthcare/scorecard_header.png)
 
 
 

@@ -57,7 +57,7 @@ Feature		    |Pre-Approved		        |	Indicates if the loan applicant has been e
 Target Variable	|LoanStatus		            |	Indicates the status of the loan application
 
 
-Follow this link to find the [data dictionary](./data_dictionary/Data_dictionary_Finance.xlsx) for this scenario.
+Follow this link to find the [data dictionary](./data_dictionaries/data_dictionaries_Finance.xlsx) for this scenario.
 
 
 ## Debugging the classification model 
@@ -82,47 +82,47 @@ This could be any group of observations, that when grouped by a common character
 
 Looking at the root node of the tree (representing errors on all data) we see the error rate for all predictions is about 2.4%. 
 
-![Error-Analysis-00](./media/finserve/errorAnalysis_wholeTree.png)
+![Error-Analysis-00](/documentation/media/finserve/errorAnalysis_wholeTree.png)
 
 
 **Explore nodes** – Look at the left branch shown below with Loan_Tenure <= 5.50 and  Credit_Utilization > 14.5, which has a higher error rate of over 16%, about 8x higher than the base error rate (25/1050). 
 
 
-![Error-Analysis-01](./media/finserve/errorAnalysis_lowTenure_highUtilization.png)
+![Error-Analysis-01](/documentation/media/finserve/errorAnalysis_lowTenure_highUtilization.png)
 
 This contrasts sharply with loan applicants of identical Loan_Tenure, but with Credit_Utilization <= 14.5, a group with an error rate of 0. 
 
-![Error-Analysis-01.1](./media/finserve/errorAnalysis_lowTenure_lowUtilization.png)
+![Error-Analysis-01.1](/documentation/media/finserve/errorAnalysis_lowTenure_lowUtilization.png)
 
 These two cohorts are two good options to save in order to explore further. Click on the erroneous node again and choose the “Save as new cohort” button, at the upper-right corner of the tree map.
 
 
-![Error-Analysis-02](./media/finserve/errorAnalysis_createCohort.png)
+![Error-Analysis-02](/documentation/media/finserve/errorAnalysis_createCohort.png)
 
 Then pick a useful name for the cohort. 
 It can be helpful to copy the node filters directly into the cohort name. 
 We call this cohort "Error--Credit_Utilization > 14.50, Loan_Tenure <= 5.50."
 
-![Error-Analysis-03](./media/finserve/errorAnalysis_saveCohort.png)
+![Error-Analysis-03](/documentation/media/finserve/errorAnalysis_saveCohort.png)
 
 
 Similarly, click on the contrast left node and save that as a new cohort too! We name it "NoError--Credit_Utilization <= 14.50, Loan_Tenure <= 5.50."  
 
-![Error-Analysis-03.1](./media/finserve/errorAnalysis_saveCohort_noError.png)
+![Error-Analysis-03.1](/documentation/media/finserve/errorAnalysis_saveCohort_noError.png)
 
 
  **Top features leading to errors** – Click on the feature list icon at the top of the error analysis section. This will surface a list of features, ranked by their correlations to the model’s errors.
 
-![Error-Analysis-04](./media/finserve/errorAnalysis_featureListTab.png)
+![Error-Analysis-04](/documentation/media/finserve/errorAnalysis_featureListTab.png)
 
 
-![Error-Analysis-05](./media/finserve/errorAnalysis_featureList.png)
+![Error-Analysis-05](/documentation/media/finserve/errorAnalysis_featureList.png)
 
 
 The Heat map component can also be quite useful. 
 Start by selecting heat map. 
 
-![Heat-Map-00](./media/finserve/heatMap_heatMapSelect.png)
+![Heat-Map-00](/documentation/media/finserve/heatMap_heatMapSelect.png)
 
 
 The heat map is useful for taking a closer look at certain groups, to explore different “slices” of the data. 
@@ -135,21 +135,21 @@ Like the error tree nodes, you can “save a new cohort” based on your selecte
 As an example, select “Credit_score” as Feature 1 (leave Feature 2 blank) and adjust the binning threshold slider to 3 (to create 3 cohorts based on credit score).
 
 
-![Heat-Map-01](./media/finserve/heatMap_binThresholdSelect.png)
+![Heat-Map-01](/documentation/media/finserve/heatMap_binThresholdSelect.png)
 
 Next, hover over each of the three squares. 
 You will see Error Rate and Error Coverage. 
 Comparing the error rates, you will see similar values 2.16% - 2.55%. 
 The error coverage values have a much higher range, 24.0% - 48%. 
 
-![Heat-Map-02](./media/finserve/errorAnalysis_heatMap_errorCoverage.png)
+![Heat-Map-02](/documentation/media/finserve/errorAnalysis_heatMap_errorCoverage.png)
 
 
 **Custom cohorts** -- Outside the error analysis experience, you can also create custom cohorts. 
 Simply click on the “+ New cohort” button near the top of the chart. 
 You will be presented with a menu to identify the features and filters that can be used to form a cohort. 
 
-![Custom-Cohorts-00](./media/finserve/errorTree_selectNewCohort.png)
+![Custom-Cohorts-00](/documentation/media/finserve/errorTree_selectNewCohort.png)
 
 ### Model overview and performance analysis
 Here we can look at all the data and compare individual cohorts. 
@@ -158,18 +158,18 @@ You will see the difference in accuracy metrics in our cohorts.
 
 **All data grid**
 
-![Model-Perf-00](./media/finserve/modelPerf_overview.png)   
+![Model-Perf-00](/documentation/media/finserve/modelPerf_overview.png)   
 
 Similar investigations can be performed using the visualization options presented below the metrics table.
 
 
-![Model-Perf-00.1](./media/finserve/modelPerf_confusionMatrix.png)
+![Model-Perf-00.1](/documentation/media/finserve/modelPerf_confusionMatrix.png)
 
 
 These will present a variety of options, including several bar chart views and a confusion matrix. These can be customized by different dimensions, such as cohort or metric.
 
 
-![Model-Perf-00.2](./media/finserve/modelPerf_probDistribution.png)
+![Model-Perf-00.2](/documentation/media/finserve/modelPerf_probDistribution.png)
 
 
 ### Fairness 
@@ -181,7 +181,7 @@ These can be cohorts you previously defined or newly defined groups.
 This component also allows you look more closely at how the  model performs with respect to certain features. 
 Use the Feature(s) drop-down to select gender. 
 
-![Model-Perf-01](./media/finserve/modelPerf_featureCohorts.png)
+![Model-Perf-01](/documentation/media/finserve/modelPerf_featureCohorts.png)
 
 Here you will see that there are significant differences in model performance across gender. 
 The model has similar accuracy, but Males are having a much higher false positive rate, 
@@ -189,14 +189,14 @@ and Females are having a much higher False negative rate.
 This indicates that men are more likely to be approved, when they are risky borrowers, 
 whereas women are more likely to be rejected, when they are less-risky borrowers. 
 
-![Model-Perf-02](./media/finserve/modelPerf_genderCohorts.png)
+![Model-Perf-02](/documentation/media/finserve/modelPerf_genderCohorts.png)
 
 
 Let's create new cohorts, using the gender feature. 
 Click on "+ New cohort" button and apply the filters. 
 After defining the cohort criteria, click "Add filter" and then "Save." 
 
-![Model-Perf-03](./media/finserve/modelPerf_newFemaleCohort.png)
+![Model-Perf-03](/documentation/media/finserve/modelPerf_newFemaleCohort.png)
 
 Do this for both Female and Male applicants. 
 These will be very useful when applying the next dashboard component. 
@@ -216,20 +216,20 @@ Start by selecting "Chart view," then:
 
 This will allow us to explore the "ground truth" data from the cohort.
 
-![Data-Analysis-00](./media/finserve/dataAnalysis_selectChartView.png)
+![Data-Analysis-00](/documentation/media/finserve/dataAnalysis_selectChartView.png)
 
-![Data-Analysis-01](./media/finserve/dataAnalysis_selectTrueY.png)
+![Data-Analysis-01](/documentation/media/finserve/dataAnalysis_selectTrueY.png)
 
 Let's now look at the two cohorts from the error tree. 
 Keep the axis labels the same and toggle to the error prone cohort. 
 Here we see the data is more heavily weighted to those applicants were approved. 
 
-![Data-Analysis-02](./media/finserve/dataAnalysis_errorCohortChart.png)
+![Data-Analysis-02](/documentation/media/finserve/dataAnalysis_errorCohortChart.png)
 
 When you switch the cohort to the group without any errors, 
 we see that this population is even more heavily weighted towards approvals. 
 
-![Data-Analysis-03](./media/finserve/dataAnalysis_noErrorCohortChart.png)
+![Data-Analysis-03](/documentation/media/finserve/dataAnalysis_noErrorCohortChart.png)
 
 
 This highlights the issue of saliency. 
@@ -264,11 +264,11 @@ For this analysis, use the slider to see the top four most important features,
 and remove all cohorts except the "All Data" cohort. 
 
 
-![Feature-Importance-00](./media/finserve/featureImportance_global_allCohortsLegend.png)
+![Feature-Importance-00](/documentation/media/finserve/featureImportance_global_allCohortsLegend.png)
 
 Observing the overall feature importance values on the entire test set, we see that "Pre-Approved", "Open_CreditAcc". "Credit_Score", and"Gender" are the dominant features across all datapoints. The model uses them as strong indicators for predicting loan approval or rejection.  
 
-![Feature-Importance-00.1](./media/finserve/featureImportance_global_onlyAllData.png)
+![Feature-Importance-00.1](/documentation/media/finserve/featureImportance_global_onlyAllData.png)
 
 Seeing pre-approval as the most important feature is not surprising. 
 We also see that gender is one of the top four. 
@@ -280,7 +280,7 @@ Using the "Class importance weights" dropdown on the right of the chart,
 select "Class: Approved" to see how the model is using feature values of Gender for predicting loan approvals.  
 
 
-![Feature-Importance-01](./media/finserve/featureImportance_gender_classImportance.png)
+![Feature-Importance-01](/documentation/media/finserve/featureImportance_gender_classImportance.png)
 
 
 
@@ -293,7 +293,7 @@ or use any of the unfairness mitigation algorithms covered in [Fairlearn](https:
 to mitigate the observed fairness issues.
 
 
-![Feature-Importance-02](./media/finserve/featureImportance_gender_viewDependence.png)
+![Feature-Importance-02](/documentation/media/finserve/featureImportance_gender_viewDependence.png)
 
 ### Counterfactual analysis 
 Now let's look at a loan applicant that was rejected by the model and see what changes to the underlying features of a datapoint that would yield a different predicted outcome. 
@@ -301,13 +301,13 @@ Now let's look at a loan applicant that was rejected by the model and see what c
 Begin by updating the y-axis value to "Predicted Y," 
 and the x-axis to "Probability: Approved," if not already selected. 
 
-![Counterfactual-00](./media/finserve/counterfactual_start.png)
+![Counterfactual-00](/documentation/media/finserve/counterfactual_start.png)
 
 
 For example, use the "Selected datapoint" drop down to select Index 589. 
 Then click on "Create what-if counterfactual." 
 
-![Counterfactual-01](./media/finserve/counterfactual_selectIndex589.png)
+![Counterfactual-01](/documentation/media/finserve/counterfactual_selectIndex589.png)
 
 
 This will bring you to a chart where you can see the current scenario at the top, 
@@ -316,7 +316,7 @@ and the next 10 datapoints showcase several other scenarios that would likely re
 In particular, you can see that this applicant has a relatively low income and
 if their income were higher they would likely be approved. 
 
-![Counterfactual-02](./media/finserve/counterfactual_compareIncome.png)  
+![Counterfactual-02](/documentation/media/finserve/counterfactual_compareIncome.png)  
 
 Now, go to the bottom of the chart to perturb any feature values of the selected data point to see how the prediction changes. 
 For instance, provide a much higher value for income, such as 22,000, and you will see the predicted value changes to “1”, 
@@ -327,7 +327,7 @@ To see this alternate outcome on the original chart,
 click on "Save as a new datapoint" button, 
 at the bottom of the screen. 
 
-![Counterfactual-03](./media/finserve/counterfactual_update589.png)
+![Counterfactual-03](/documentation/media/finserve/counterfactual_update589.png)
 
 
 ## Communicate your model stats with stakeholders
@@ -338,7 +338,7 @@ The RAI dashboard is accompanied by a scorecard that allows you to easily share 
 In this example, the scorecard is generated as a named output. 
 The easiest way to find it is by navigating to the folder in your Azure ML studio workspace where you saved the Jupyter notebook. 
 
-![Scorecard-00](./media/finserve/scorecard_location.png)
+![Scorecard-00](/documentation/media/finserve/scorecard_location.png)
 
 
  Here you will find a PDF document that contains valuable information about the model itself and its performance (see example below). 
@@ -347,7 +347,7 @@ The easiest way to find it is by navigating to the folder in your Azure ML studi
  You can easily share it with others for auditing purposes or for helping other stakeholders build trust with your AI systems.
 
 
-![Scorecard-01](./media/finserve/scorecard_summary.png))
+![Scorecard-01](/documentation/media/finserve/scorecard_summary.png))
 
 
 ## Conclusion
