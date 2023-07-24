@@ -64,7 +64,7 @@ With these valuable insights, the customer service representative can make concr
 
 - **Education** - Student attrition rates are a key performance indicator for any higher education provider and have a significant
 impact on students. Understanding what causes student attrition (ie financial status, academic performance, or student wellbeing)
-is a complex challenge which is often specific to individual student circumstances. The RAI dashboard can help higher education decision makers better understand student attrition while informingthe creation of intervents to improve student support services and foster student engagment and belonging.
+is a complex challenge which is often specific to individual student circumstances. The RAI dashboard can help higher education decision makers better understand student attrition. Further, the RAI dashboard can inform the creation of interventions to improve student support services and foster student engagment and belonging.
 
 
 
@@ -146,11 +146,11 @@ if you need additional guidance with this task.
     this scenario highlights a causal analysis tool that can guide real-world action. 
     This notebook takes about **25-30 minutes** to create the dashboard.  
     
-    - Follow this link to the [Jupyter notebook](./healthcare_story/Covid_Healthcare_Dashboard.ipynb). 
+    - Follow this link to the [Jupyter notebook](./education_story/Education_Dashboard.ipynb). 
         - If you choose not to clone this repo to Azure ML studio, 
         check [this link](./documentation/uploadjupyternotebookandrun.md) for guidance on uploading the notebook and data files.  
     - Once you have finished running the notebook,
-    refer to this [Education scenario guide](./documentation/healthCareExample.md) 
+    refer to this [Education scenario guide](./documentation/educationExample.md) 
     for suggestions on how to interpret and apply the Responsible AI dashboard.  
     <br />
 
