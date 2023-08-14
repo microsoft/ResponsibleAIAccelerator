@@ -1,6 +1,6 @@
 ## About this repository
 This repo demonstrates how you can use the Azure Machine Learning [Responsible AI dashboard](https://github.com/microsoft/responsible-ai-toolbox#introducing-responsible-ai-dashboard) to evaluate and debug your machine learning models, 
-to help reduce error and fairness issues in your model predictions and data driven decisions. 
+to help reduce error and fairness issues in your model predictions and make data-driven decisions. 
 It describes three different demonstration implementations of the dashboard, covering a financial services scenario, a health care scenario, and a higher education scenario.
 
 
