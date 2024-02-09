@@ -1,3 +1,6 @@
+## Notice: the notebooks from this repository have been migrated to azureml-examples.  Please use azureml-examples in the future:
+https://github.com/Azure/azureml-examples/tree/main/sdk/python/responsible-ai
+
 ## About this repository
 This repo demonstrates how you can use the Azure Machine Learning [Responsible AI dashboard](https://github.com/microsoft/responsible-ai-toolbox#introducing-responsible-ai-dashboard) to evaluate and debug your machine learning models, 
 to help reduce error and fairness issues in your model predictions and make data-driven decisions. 
